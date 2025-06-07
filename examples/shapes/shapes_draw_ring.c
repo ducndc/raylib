@@ -2,6 +2,8 @@
 *
 *   raylib [shapes] example - draw ring (with gui options)
 *
+*   Example complexity rating: [★★★☆] 3/4
+*
 *   Example originally created with raylib 2.5, last time updated with raylib 2.5
 *
 *   Example contributed by Vlad Adrian (@demizdor) and reviewed by Ramon Santamaria (@raysan5)
@@ -9,11 +11,11 @@
 *   Example licensed under an unmodified zlib/libpng license, which is an OSI-certified,
 *   BSD-like license that allows static linking with closed source software
 *
-*   Copyright (c) 2018-2024 Vlad Adrian (@demizdor) and Ramon Santamaria (@raysan5)
+*   Copyright (c) 2018-2025 Vlad Adrian (@demizdor) and Ramon Santamaria (@raysan5)
 *
 ********************************************************************************************/
 
-#include <raylib.h>
+#include "raylib.h"
 
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"                 // Required for GUI controls
@@ -69,13 +71,13 @@ int main(void)
 
             // Draw GUI controls
             //------------------------------------------------------------------------------
-            GuiSliderBar((Rectangle){ 600, 40, 120, 20 }, "StartAngle", NULL, &startAngle, -450, 450);
-            GuiSliderBar((Rectangle){ 600, 70, 120, 20 }, "EndAngle", NULL, &endAngle, -450, 450);
+            GuiSliderBar((Rectangle){ 600, 40, 120, 20 }, "StartAngle", TextFormat("%.2f", startAngle), &startAngle, -450, 450);
+            GuiSliderBar((Rectangle){ 600, 70, 120, 20 }, "EndAngle", TextFormat("%.2f", endAngle), &endAngle, -450, 450);
 
-            GuiSliderBar((Rectangle){ 600, 140, 120, 20 }, "InnerRadius", NULL, &innerRadius, 0, 100);
-            GuiSliderBar((Rectangle){ 600, 170, 120, 20 }, "OuterRadius", NULL, &outerRadius, 0, 200);
+            GuiSliderBar((Rectangle){ 600, 140, 120, 20 }, "InnerRadius", TextFormat("%.2f", innerRadius), &innerRadius, 0, 100);
+            GuiSliderBar((Rectangle){ 600, 170, 120, 20 }, "OuterRadius", TextFormat("%.2f", outerRadius), &outerRadius, 0, 200);
 
-            GuiSliderBar((Rectangle){ 600, 240, 120, 20 }, "Segments", NULL, &segments, 0, 100);
+            GuiSliderBar((Rectangle){ 600, 240, 120, 20 }, "Segments", TextFormat("%.2f", segments), &segments, 0, 100);
 
             GuiCheckBox((Rectangle){ 600, 320, 20, 20 }, "Draw Ring", &drawRing);
             GuiCheckBox((Rectangle){ 600, 350, 20, 20 }, "Draw RingLines", &drawRingLines);

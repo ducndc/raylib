@@ -2,12 +2,14 @@
 *
 *   raylib [shapes] example - bouncing ball
 *
+*   Example complexity rating: [★☆☆☆] 1/4
+*
 *   Example originally created with raylib 2.5, last time updated with raylib 2.5
 *
 *   Example licensed under an unmodified zlib/libpng license, which is an OSI-certified,
 *   BSD-like license that allows static linking with closed source software
 *
-*   Copyright (c) 2013-2024 Ramon Santamaria (@raysan5)
+*   Copyright (c) 2013-2025 Ramon Santamaria (@raysan5)
 *
 ********************************************************************************************/
 
@@ -62,7 +64,7 @@ int main(void)
             ClearBackground(RAYWHITE);
 
             DrawCircleV(ballPosition, (float)ballRadius, MAROON);
-            //DrawText("PRESS SPACE to PAUSE BALL MOVEMENT", 10, GetScreenHeight() - 25, 20, LIGHTGRAY);
+            DrawText("PRESS SPACE to PAUSE BALL MOVEMENT", 10, GetScreenHeight() - 25, 20, LIGHTGRAY);
 
             // On pause, we draw a blinking message
             if (pause && ((framesCounter/30)%2)) DrawText("PAUSED", 350, 200, 30, GRAY);

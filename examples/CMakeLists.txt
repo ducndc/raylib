@@ -90,16 +90,16 @@ if (${PLATFORM} MATCHES "Android")
 
     list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/shaders/shaders_custom_uniform.c)
     list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/shaders/shaders_model_shader.c)
+    list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/shaders/shaders_view_depth.c)
     list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/shaders/shaders_postprocessing.c)
     list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/shaders/shaders_raymarching.c)
     list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/shaders/shaders_palette_switch.c)
     list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/shaders/shaders_basic_lighting.c)
 
 elseif (${PLATFORM} MATCHES "Web")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Os -s USE_GLFW=3 -s ASSERTIONS=1 -s WASM=1 -s ASYNCIFY")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Os")
     # Since WASM is used, ALLOW_MEMORY_GROWTH has no extra overheads
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -s ALLOW_MEMORY_GROWTH=1 --no-heap-copy")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --shell-file ${CMAKE_SOURCE_DIR}/src/shell.html")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s WASM=1 -s ASYNCIFY -s ALLOW_MEMORY_GROWTH=1 --shell-file ${CMAKE_SOURCE_DIR}/src/shell.html")
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
 
     list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/others/raylib_opengl_interop.c)
@@ -113,12 +113,33 @@ elseif ("${PLATFORM}" STREQUAL "DRM")
     list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/others/rlgl_standalone.c)
     list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/others/raylib_opengl_interop.c)
 
+elseif (NOT SUPPORT_GESTURES_SYSTEM)
+    # Items requiring gestures system
+    list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/textures/textures_mouse_painting.c)
+    list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/core/core_basic_screen_manager.c)
+    list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/core/core_input_gestures_web.c)
+    list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/core/core_input_gestures.c)
+
 endif ()
 
 # The rlgl_standalone example only targets desktop, without shared libraries.
 if (BUILD_SHARED_LIBS OR NOT ${PLATFORM} MATCHES "Desktop")
     list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/others/rlgl_standalone.c)
+endif()
 
+# The audio examples fail to link if raylib is built without raudio
+if (NOT SUPPORT_MODULE_RAUDIO)
+    list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/audio/audio_mixed_processor.c)
+    list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/audio/audio_module_playing.c)
+    list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/audio/audio_music_stream.c)
+    list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/audio/audio_raw_stream.c)
+    list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/audio/audio_sound_loading.c)
+    list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/audio/audio_sound_multi.c)
+    list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/audio/audio_stream_effects.c)
+
+    list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/others/embedded_files_loading.c)
+    list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/textures/textures_sprite_button.c)
+    list(REMOVE_ITEM example_sources ${CMAKE_CURRENT_SOURCE_DIR}/textures/textures_sprite_explosion.c)
 endif()
 
 include_directories(BEFORE SYSTEM others/external/include)

@@ -2,6 +2,8 @@
 *
 *   raylib [shaders] example - basic lighting
 *
+*   Example complexity rating: [★★★★] 4/4
+*
 *   NOTE: This example requires raylib OpenGL 3.3 or ES2 versions for shaders support,
 *         OpenGL 1.1 does not support shaders, recompile raylib to OpenGL 3.3 version.
 *
@@ -9,12 +11,12 @@
 *
 *   Example originally created with raylib 3.0, last time updated with raylib 4.2
 *
-*   Example contributed by Chris Camacho (@codifies) and reviewed by Ramon Santamaria (@raysan5)
+*   Example contributed by Chris Camacho (@chriscamacho) and reviewed by Ramon Santamaria (@raysan5)
 *
 *   Example licensed under an unmodified zlib/libpng license, which is an OSI-certified,
 *   BSD-like license that allows static linking with closed source software
 *
-*   Copyright (c) 2019-2024 Chris Camacho (@codifies) and Ramon Santamaria (@raysan5)
+*   Copyright (c) 2019-2025 Chris Camacho (@chriscamacho) and Ramon Santamaria (@raysan5)
 *
 ********************************************************************************************/
 
@@ -52,10 +54,6 @@ int main(void)
     camera.fovy = 45.0f;                                // Camera field-of-view Y
     camera.projection = CAMERA_PERSPECTIVE;             // Camera projection type
 
-    // Load plane model from a generated mesh
-    Model model = LoadModelFromMesh(GenMeshPlane(10.0f, 10.0f, 3, 3));
-    Model cube = LoadModelFromMesh(GenMeshCube(2.0f, 4.0f, 2.0f));
-    
     // Load basic lighting shader
     Shader shader = LoadShader(TextFormat("resources/shaders/glsl%i/lighting.vs", GLSL_VERSION),
                                TextFormat("resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
@@ -68,10 +66,6 @@ int main(void)
     // Ambient light level (some basic lighting)
     int ambientLoc = GetShaderLocation(shader, "ambient");
     SetShaderValue(shader, ambientLoc, (float[4]){ 0.1f, 0.1f, 0.1f, 1.0f }, SHADER_UNIFORM_VEC4);
-
-    // Assign out lighting shader to model
-    model.materials[0].shader = shader;
-    cube.materials[0].shader = shader;
 
     // Create lights
     Light lights[MAX_LIGHTS] = { 0 };
@@ -112,8 +106,12 @@ int main(void)
 
             BeginMode3D(camera);
 
-                DrawModel(model, Vector3Zero(), 1.0f, WHITE);
-                DrawModel(cube, Vector3Zero(), 1.0f, WHITE);
+                BeginShaderMode(shader);
+
+                    DrawPlane(Vector3Zero(), (Vector2) { 10.0, 10.0 }, WHITE);
+                    DrawCube(Vector3Zero(), 2.0, 4.0, 2.0, WHITE);
+
+                EndShaderMode();
 
                 // Draw spheres to show where the lights are
                 for (int i = 0; i < MAX_LIGHTS; i++)
@@ -136,8 +134,6 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    UnloadModel(model);     // Unload the model
-    UnloadModel(cube);      // Unload the model
     UnloadShader(shader);   // Unload shader
 
     CloseWindow();          // Close window and OpenGL context

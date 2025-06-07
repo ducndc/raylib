@@ -2,6 +2,8 @@
 *
 *   raylib [shapes] example - draw rectangle rounded (with gui options)
 *
+*   Example complexity rating: [★★★☆] 3/4
+*
 *   Example originally created with raylib 2.5, last time updated with raylib 2.5
 *
 *   Example contributed by Vlad Adrian (@demizdor) and reviewed by Ramon Santamaria (@raysan5)
@@ -9,11 +11,11 @@
 *   Example licensed under an unmodified zlib/libpng license, which is an OSI-certified,
 *   BSD-like license that allows static linking with closed source software
 *
-*   Copyright (c) 2018-2024 Vlad Adrian (@demizdor) and Ramon Santamaria (@raysan5)
+*   Copyright (c) 2018-2025 Vlad Adrian (@demizdor) and Ramon Santamaria (@raysan5)
 *
 ********************************************************************************************/
 
-#include <raylib.h>
+#include "raylib.h"
 
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"                 // Required for GUI controls
@@ -62,15 +64,15 @@ int main(void)
 
             if (drawRect) DrawRectangleRec(rec, Fade(GOLD, 0.6f));
             if (drawRoundedRect) DrawRectangleRounded(rec, roundness, (int)segments, Fade(MAROON, 0.2f));
-            if (drawRoundedLines) DrawRectangleRoundedLines(rec, roundness, (int)segments, lineThick, Fade(MAROON, 0.4f));
+            if (drawRoundedLines) DrawRectangleRoundedLinesEx(rec, roundness, (int)segments, lineThick, Fade(MAROON, 0.4f));
 
             // Draw GUI controls
             //------------------------------------------------------------------------------
-            GuiSliderBar((Rectangle){ 640, 40, 105, 20 }, "Width", NULL, &width, 0, (float)GetScreenWidth() - 300);
-            GuiSliderBar((Rectangle){ 640, 70, 105, 20 }, "Height", NULL, &height, 0, (float)GetScreenHeight() - 50);
-            GuiSliderBar((Rectangle){ 640, 140, 105, 20 }, "Roundness", NULL, &roundness, 0.0f, 1.0f);
-            GuiSliderBar((Rectangle){ 640, 170, 105, 20 }, "Thickness", NULL, &lineThick, 0, 20);
-            GuiSliderBar((Rectangle){ 640, 240, 105, 20}, "Segments", NULL, &segments, 0, 60);
+            GuiSliderBar((Rectangle){ 640, 40, 105, 20 }, "Width", TextFormat("%.2f", width), &width, 0, (float)GetScreenWidth() - 300);
+            GuiSliderBar((Rectangle){ 640, 70, 105, 20 }, "Height", TextFormat("%.2f", height), &height, 0, (float)GetScreenHeight() - 50);
+            GuiSliderBar((Rectangle){ 640, 140, 105, 20 }, "Roundness", TextFormat("%.2f", roundness), &roundness, 0.0f, 1.0f);
+            GuiSliderBar((Rectangle){ 640, 170, 105, 20 }, "Thickness", TextFormat("%.2f", lineThick), &lineThick, 0, 20);
+            GuiSliderBar((Rectangle){ 640, 240, 105, 20}, "Segments", TextFormat("%.2f", segments), &segments, 0, 60);
 
             GuiCheckBox((Rectangle){ 640, 320, 20, 20 }, "DrawRoundedRect", &drawRoundedRect);
             GuiCheckBox((Rectangle){ 640, 350, 20, 20 }, "DrawRoundedLines", &drawRoundedLines);

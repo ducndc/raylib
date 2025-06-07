@@ -2,12 +2,14 @@
 *
 *   raylib [core] example - Storage save/load values
 *
+*   Example complexity rating: [★★☆☆] 2/4
+*
 *   Example originally created with raylib 1.4, last time updated with raylib 4.2
 *
 *   Example licensed under an unmodified zlib/libpng license, which is an OSI-certified,
 *   BSD-like license that allows static linking with closed source software
 *
-*   Copyright (c) 2015-2024 Ramon Santamaria (@raysan5)
+*   Copyright (c) 2015-2025 Ramon Santamaria (@raysan5)
 *
 ********************************************************************************************/
 
@@ -177,7 +179,7 @@ int LoadStorageValue(unsigned int position)
 
     if (fileData != NULL)
     {
-        if (dataSize < (position*4)) TraceLog(LOG_WARNING, "FILEIO: [%s] Failed to find storage position: %i", STORAGE_DATA_FILE, position);
+        if (dataSize < ((int)(position*4))) TraceLog(LOG_WARNING, "FILEIO: [%s] Failed to find storage position: %i", STORAGE_DATA_FILE, position);
         else
         {
             int *dataPtr = (int *)fileData;

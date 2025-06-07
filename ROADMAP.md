@@ -1,18 +1,20 @@
 # raylib roadmap
 
-Here it is a wishlist with features and ideas to improve the library. Note that features listed here are usually long term improvements or just describe a route to follow for the library. There are also some additional places to look for raylib improvements and ideas:
+Here is a wishlist with features and ideas to improve the library. Note that features listed here are usually long term improvements or just describe a route to follow for the library. There are also some additional places to look for raylib improvements and ideas:
 
  - [GitHub Issues](https://github.com/raysan5/raylib/issues) has several open issues for possible improvements or bugs to fix.
+ - [GitHub PRs](https://github.com/raysan5/raylib/pulls) open with improvements to be reviewed.
  - [raylib source code](https://github.com/raysan5/raylib/tree/master/src) has multiple *TODO* comments around code with pending things to review or improve.
  - raylib wishlists discussions are open to everyone to ask for improvements, feel free to check and comment:
-    - [raylib wishlist 2021](https://github.com/raysan5/raylib/discussions/1502)
-    - [raylib wishlist 2022](https://github.com/raysan5/raylib/discussions/2272)
+    - [raylib 6.0 wishlist](https://github.com/raysan5/raylib/discussions/4660)
     - [raylib 5.0 wishlist](https://github.com/raysan5/raylib/discussions/2952)
-
+    - [raylib wishlist 2022](https://github.com/raysan5/raylib/discussions/2272)
+    - [raylib wishlist 2021](https://github.com/raysan5/raylib/discussions/1502)
+    
 _Current version of raylib is complete and functional but there is always room for improvements._
 
 **raylib 5.x**
- - [ ] `rcore`: Support additional platforms: iOS, Xbox Series S|X
+ - [ ] `rcore`: Support additional platforms: iOS, consoles?
  - [ ] `rcore_web`: Avoid GLFW dependency, functionality can be directly implemented using emscripten SDK
  - [ ] `rlgl`: Review GLSL shaders naming conventions for consistency
  - [ ] `textures`: Improve compressed textures support, loading and saving
@@ -73,7 +75,7 @@ _Current version of raylib is complete and functional but there is always room f
 **raylib 1.5**
  - [x] Support Oculus Rift CV1 and VR stereo rendering (simulator)
  - [x] Redesign Shaders/Textures system -> New Materials system
- - [x] Support lighting: Omni, Directional and Spot lights
+ - [x] Support lighting: Omni, Directional and Spotlights
  - [x] Redesign physics module (physac)
  - [x] Chiptunes audio modules support
 

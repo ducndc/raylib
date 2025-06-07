@@ -2,12 +2,14 @@
 *
 *   raylib [textures] example - sprite explosion
 *
+*   Example complexity rating: [★★☆☆] 2/4
+*
 *   Example originally created with raylib 2.5, last time updated with raylib 3.5
 *
 *   Example licensed under an unmodified zlib/libpng license, which is an OSI-certified,
 *   BSD-like license that allows static linking with closed source software
 *
-*   Copyright (c) 2019-2024 Anata and Ramon Santamaria (@raysan5)
+*   Copyright (c) 2019-2025 Ramon Santamaria (@raysan5)
 *
 ********************************************************************************************/
 
@@ -48,8 +50,8 @@ int main(void)
     bool active = false;
     int framesCounter = 0;
 
-    SetTargetFPS(120);
-    //--------------------------------------------------------------------------------------
+    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+    //---------------------------------------------------------------------------------------
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
